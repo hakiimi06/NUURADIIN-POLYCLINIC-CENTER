@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Warqad Baaritaan Caafimaad - Hakiimi Pharmacy</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* Qaabeynta stamp iyo logo */
+    #logo {
+      width: 120px;
+      height: auto;
+    }
+    #stamp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 150px;
+      opacity: 0.6;
+    }
+    /* Midabka iyo qaabka header-info (magaca pharmacy iyo tel) */
+    #header-info {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5;
+      user-select: none;
+      background-color: #004080; /* Navy blue */
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      min-width: 220px;
+    }
+    /* Badhanka daabacaada midab iyo hover */
+    #printBtn {
+      background-color: #007bff;
+      border: none;
+      padding: 10px 25px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+      color: white;
+    }
+    #printBtn:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 12px rgba(0,86,179,0.5);
+      cursor: pointer;
+    }
+
+    /* Qaabeynta qoraalka signature */
+    #signature {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-top: 50px;
+      color: #004080;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Qurxinta label iyo input */
+    label.form-label {
+      font-weight: 600;
+      color: #004080;
+    }
+    input.form-control {
+      border: 2px solid #004080;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+    }
+    input.form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 8px rgba(0,123,255,0.5);
+    }
+
+    /* Qurxinta checkbox labels */
+    .form-check-label {
+      color: #004080;
+      font-weight: 600;
+    }
+
+    /* Midabka cudurada la doortay */
+    .disease-selected {
+      background-color: #cce5ff;
+      border: 1px solid #b8daff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #004085;
+      font-weight: 600;
+    }
+
+    /* Print styles */
+    @media print {
+      /* Qarso qoraalka cudurada iyo checkbox group */
+      #disease-label,
+      .disease-group {
+        display: none !important;
+      }
+      /* Qarso badhanka daabacaada */
+      #printBtn {
+        display: none !important;
+      }
+      /* Qarso checkbox iyo labels */
+      input[type="checkbox"],
+      label[for^="chk"] {
+        display: none !important;
+      }
+      /* Inputs text iyo date ha noqdaan qoraal nadiif ah */
+      input[type="text"],
+      input[type="date"] {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: auto !important;
+        font-size: 1rem !important;
+        font-family: inherit !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="container my-4">
+
+  <!-- Header line: magaca pharmacy, telefoon, logo -->
+  <div class="d-flex align-items-center mb-4">
+    <div id="header-info" class="me-3">
+      <div><strong>NUURADIIN POLYCLINIC CENTER</strong></div>
+      <div>Tel: +252613615599 / +252613615588</div>
+    </div>
+    <img src="NUURADIIN.png" alt="Logo" id="logo" />
+  </div>
+
+  <h1 class="text-center mb-4" style="color:#004080;">Warqada  Caafimadka bukaanka </h1>
+
+  <form id="healthForm" class="mb-5">
+    <div class="mb-3">
+      <label for="ddy" class="form-label">Taariikhda warqada:</label>
+      <input type="date" class="form-control" id="ddy" name="ddy" max="" />
+    </div>
+    <div class="mb-3">
+      <label for="patientName" class="form-label">Magaca bukaanka:</label>
+      <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Magaca bukaan" />
+    </div>
+
+    <div class="mb-3">
+      <label for="motherName" class="form-label">Magaca Hooyada:</label>
+      <input type="text" class="form-control" id="motherName" name="motherName" placeholder="Magaca hooyada" />
+    </div>
+
+    <div class="mb-3">
+      <label for="dob" class="form-label">Taariikhda Dhalashada:</label>
+      <input type="date" class="form-control" id="dob" name="dob" max="" />
+    </div>
+
+    <div class="mb-3">
+      <label id="disease-label" class="form-label">Cudurada (doorasho hal ama ka badan):</label>
+      <div class="disease-group">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Gaas" id="chk1" />
+          <label class="form-check-label" for="chk1">Gaas</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="-negative" id="chk2" />
+          <label class="form-check-label" for="chk2">-negative</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Tiifow" id="chk2" />
+          <label class="form-check-label" for="chk2">Tiifow</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Xasaasiyad" id="chk3" />
+          <label class="form-check-label" for="chk3">Xasasiyad</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Bahal" id="chk4" />
+          <label class="form-check-label" for="chk4">Bahal</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Naqas" id="chk5" />
+          <label class="form-check-label" for="chk5">Naqas</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Neef" id="chk6" />
+          <label class="form-check-label" for="chk6">Neef</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="tabar yari" id="chk7" />
+          <label class="form-check-label" for="chk7">tabar yari</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="hergab" id="chk8" />
+          <label class="form-check-label" for="chk8">hergab</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="Malaria" id="chk9" />
+          <label class="form-check-label" for="chk9">Malaria</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="igfashin" id="chk8" />
+          <label class="form-check-label" for="chk8">igfashin</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="disease" value="uur" id="chk8" />
+          <label class="form-check-label" for="chk8">uur</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="blood-G" value="Diabetes" id="chk8" />
+          <label class="form-check-label" for="chk8">blood-G</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="printBtn" class="btn btn-primary">Daabac (Print)</button>
+  </form>
+
+  <div id="signature">Saxiixa: ____________________________</div>
+
+  <img src="stampo.png" alt="Stamp" id="stamp" />
+
+  <!-- Bootstrap 5 JS Bundle (Popper + Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const password = prompt("Fadlan geli furaha sirta ah si aad u sii wado:");
+    if (password !== "npc.") {
+      alert("Furaha sirta ah waa qalad. Galitaanka waa la diiday.");
+      document.body.innerHTML = "<h2 style='color:red;text-align:center;margin-top:50px;'>Galitaanka waa la diiday!</h2>";
+    }
+  
+
+    // Set max date to today for dob
+    document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+
+    function getSelectedDiseases() {
+      return Array.from(document.querySelectorAll('input[name="disease"]:checked')).map(cb => cb.value);
+    }
+
+    function removeExistingSelectedDiseases() {
+      const existing = document.querySelectorAll('.disease-selected');
+      existing.forEach(el => el.remove());
+    }
+
+    document.getElementById('printBtn').addEventListener('click', () => {
+      removeExistingSelectedDiseases();
+
+      const diseases = getSelectedDiseases();
+
+      const patientName = document.getElementById('patientName').value.trim();
+      const motherName = document.getElementById('motherName').value.trim();
+      const dob = document.getElementById('dob').value;
+
+      if (!patientName || !motherName || !dob) {
+        alert('Fadlan buuxi magaca bukaan, magaca hooyada, iyo taariikhda dhalashada kahor daabacaadda.');
+        return;
+      }
+
+      if (diseases.length === 0) {
+        alert('Fadlan dooro ugu yaraan hal cudur.');
+        return;
+      }
+
+      const form = document.getElementById('healthForm');
+      const diseaseDiv = document.createElement('div');
+      diseaseDiv.className = 'disease-selected mb-3 fw-semibold';
+      diseaseDiv.textContent = 'Cudurada laga helay: ' + diseases.join(', ');
+      form.appendChild(diseaseDiv);
+
+      window.print();
+
+      diseaseDiv.remove();
+    });
+  </script>
+</body>
+</html>
